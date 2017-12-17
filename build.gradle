@@ -19,6 +19,9 @@ model {
             easyloggingpp {
                 headers.srcDir "lib/easyloggingpp/src"
             }
+            eigen {
+                headers.srcDir "lib/OpenNN/eigen/src"
+            }
         }
     }
 
@@ -37,6 +40,33 @@ model {
     }
 
     components {
+        tinyxml2(NativeLibrarySpec) {
+            sources.cpp {
+                source {
+                    srcDirs "lib/OpenNN"
+                    include "tinyxml2/**/*.cpp"
+                }
+                exportedHeaders {
+                    srcDirs "lib/OpenNN"
+                    include "tinyxml2/**/*.h"
+                }
+            }
+        }
+        openNN(NativeLibrarySpec) {
+            sources.cpp {
+                source {
+                    srcDirs "lib/OpenNN"
+                    include "opennn/**/*.cpp"
+                }
+                exportedHeaders {
+                    srcDirs "lib/OpenNN"
+                    include "opennn/**/*.h"
+                }
+                
+                lib library: "eigen", linkage: "api"
+                lib library: "tinyxml2", linkage: "static"
+            }
+        }
         anni(NativeExecutableSpec) {
             if(System.properties['sun.arch.data.model'] == "64") {
                 targetPlatform "x64"
@@ -44,19 +74,18 @@ model {
                 targetPlatform "x86"
             }
 
-            sources {
-                cpp {
-                    source {
-                        srcDirs "src"
-                        include "**/*.cpp"
-                    }
-                    exportedHeaders {
-                        srcDirs "src"
-                        include "**/*.hpp"
-                    }
-                    
-                    lib library: 'easyloggingpp', linkage: 'api'
+            sources.cpp {
+                source {
+                    srcDirs "src"
+                    include "**/*.cpp"
                 }
+                exportedHeaders {
+                    srcDirs "src"
+                    include "**/*.hpp"
+                }
+                
+                lib library: "easyloggingpp", linkage: "api"
+                lib library: "openNN", linkage: "static"
             }
         }
     }
@@ -73,6 +102,9 @@ model {
                 cppCompiler.args "/W4", "/FS", "/EHsc"
             }
         }
+        withType(SharedLibraryBinary) {
+            buildable = false
+        }
         withType(StaticLibraryBinarySpec) {
             if (toolChain in Gcc) {
                 cppCompiler.args "-Werror"
@@ -81,7 +113,7 @@ model {
                 cppCompiler.args "-Werror"
             }
             if (toolChain in VisualCpp) {
-                cppCompiler.args "/W0"
+                cppCompiler.args "/W0", "/EHsc"
             }
         }
         all {
