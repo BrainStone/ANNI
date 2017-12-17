@@ -58,43 +58,57 @@ model {
                     lib library: 'easyloggingpp', linkage: 'api'
                 }
             }
-
-            binaries.all {
+        }
+    }
+    
+    binaries {
+        withType(NativeExecutableBinarySpec) {
+            if (toolChain in Gcc) {
+                cppCompiler.args "-Wall", "-Wextra", "-Wpedantic", "-fPIC"
+            }
+            if (toolChain in Clang) {
+                cppCompiler.args "-Weverything", "-pedantic"
+            }
+            if (toolChain in VisualCpp) {
+                cppCompiler.args "/W4", "/FS", "/EHsc"
+            }
+        }
+        withType(StaticLibraryBinarySpec) {
+            if (toolChain in Gcc) {
+                cppCompiler.args "-Werror"
+            }
+            if (toolChain in Clang) {
+                cppCompiler.args "-Werror"
+            }
+            if (toolChain in VisualCpp) {
+                cppCompiler.args "/W0"
+            }
+        }
+        all {
+            if(buildType == buildTypes.debug) {
+                cppCompiler.define "__DEBUG__"
+    
                 if (toolChain in Gcc) {
-                    cppCompiler.args "-Wall", "-Wextra", "-Wpedantic", "-fPIC"
+                    cppCompiler.args "-Og", "-g3"
                 }
                 if (toolChain in Clang) {
-                    cppCompiler.args "-Weverything", "-pedantic"
+                    cppCompiler.args "-O0", "-g"
                 }
                 if (toolChain in VisualCpp) {
-                    cppCompiler.args "/W4", "/FS", "/EHsc"
+                    cppCompiler.args "/Od", "/Z7"
                 }
-
-                if(buildType == buildTypes.debug) {
-                    cppCompiler.define "__DEBUG__"
-
-                    if (toolChain in Gcc) {
-                        cppCompiler.args "-Og", "-g3"
-                    }
-                    if (toolChain in Clang) {
-                        cppCompiler.args "-O0", "-g"
-                    }
-                    if (toolChain in VisualCpp) {
-                        cppCompiler.args "/Od", "/Z7"
-                    }
+            }
+            if(buildType == buildTypes.release) {
+                cppCompiler.define "__NDEBUG__"
+    
+                if (toolChain in Gcc) {
+                    cppCompiler.args "-Ofast", "-g0"
                 }
-                if(buildType == buildTypes.release) {
-                    cppCompiler.define "__NDEBUG__"
-
-                    if (toolChain in Gcc) {
-                        cppCompiler.args "-Ofast", "-g0"
-                    }
-                    if (toolChain in Clang) {
-                        cppCompiler.args "-Ofast", "-g0"
-                    }
-                    if (toolChain in VisualCpp) {
-                        cppCompiler.args "/O2"
-                    }
+                if (toolChain in Clang) {
+                    cppCompiler.args "-Ofast", "-g0"
+                }
+                if (toolChain in VisualCpp) {
+                    cppCompiler.args "/O2"
                 }
             }
         }
