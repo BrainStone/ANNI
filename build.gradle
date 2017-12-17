@@ -1,0 +1,79 @@
+apply plugin: "cpp"
+
+model {
+    platforms {
+        x86 {
+            architecture "x86"
+        }
+        x64 {
+            architecture "x64"
+        }
+    }
+    
+    buildTypes {
+        debug
+        release
+    }
+
+    components {
+        anni(NativeExecutableSpec) {
+            if(System.properties['sun.arch.data.model'] == "64") {
+                targetPlatform "x64"
+            } else {
+                targetPlatform "x86"
+            }
+
+            sources {
+                cpp {
+                    source {
+                        srcDirs "src"
+                        include "**/*.cpp"
+                    }
+                    exportedHeaders {
+                        srcDirs "src"
+                        include "**/*.hpp"
+                    }
+                }
+            }
+
+            binaries.all {
+                if (toolChain in Gcc) {
+                    cppCompiler.args "-Wall", "-Wextra", "-Wpedantic", "-fPIC"
+                }
+                if (toolChain in Clang) {
+                    cppCompiler.args "-Weverything", "-pedantic"
+                }
+                if (toolChain in VisualCpp) {
+                    cppCompiler.args "/W4", "/FS", "/EHsc"
+                }
+
+                if(buildType == buildTypes.debug) {
+                    cppCompiler.define "__DEBUG__"
+
+                    if (toolChain in Gcc) {
+                        cppCompiler.args "-Og", "-g3"
+                    }
+                    if (toolChain in Clang) {
+                        cppCompiler.args "-O0", "-g"
+                    }
+                    if (toolChain in VisualCpp) {
+                        cppCompiler.args "/Od", "/Z7"
+                    }
+                }
+                if(buildType == buildTypes.release) {
+                    cppCompiler.define "__NDEBUG__"
+
+                    if (toolChain in Gcc) {
+                        cppCompiler.args "-Ofast", "-g0"
+                    }
+                    if (toolChain in Clang) {
+                        cppCompiler.args "-Ofast", "-g0"
+                    }
+                    if (toolChain in VisualCpp) {
+                        cppCompiler.args "/O2"
+                    }
+                }
+            }
+        }
+    }
+}
