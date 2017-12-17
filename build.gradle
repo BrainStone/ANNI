@@ -14,6 +14,14 @@ model {
         }
     }
 
+    repositories {
+        libs(PrebuiltLibraries) {
+            easyloggingpp {
+                headers.srcDir "lib/easyloggingpp/src"
+            }
+        }
+    }
+
     platforms {
         x86 {
             architecture "x86"
@@ -46,6 +54,8 @@ model {
                         srcDirs "src"
                         include "**/*.hpp"
                     }
+                    
+                    lib library: 'easyloggingpp', linkage: 'api'
                 }
             }
 
