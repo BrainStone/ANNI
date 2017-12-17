@@ -1,6 +1,6 @@
 [submodule "OpenNN"]
-	path = OpenNN
+	path = lib/OpenNN
 	url = https://github.com/Artelnics/OpenNN
 [submodule "easyloggingpp"]
-	path = easyloggingpp
+	path = lib/easyloggingpp
 	url = https://github.com/muflihun/easyloggingpp
