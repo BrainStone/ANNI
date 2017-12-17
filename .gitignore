@@ -63,7 +63,10 @@ gradle-app.setting
 
 # Project-Files
 *.vcxproj
-**.vcxproj.filters
+*.vcxproj.filters
+
+# Solutions
+*.sln  
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
