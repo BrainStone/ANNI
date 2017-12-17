@@ -3,19 +3,6 @@ apply plugin: "cpp"
 // IDEs
 apply plugin: "visual-studio"
 
-allprojects {
-    model {
-        platforms {
-            x86 {
-                architecture "x86"
-            }
-            x64 {
-                architecture "x64"
-            }
-        }
-    }
-}
-
 model {
     visualStudio {
         solutions.all {
@@ -33,7 +20,7 @@ model {
     }
 
     components {
-        anni(NativeExecutableSpec) {
+        libanni(NativeLibrarySpec) {
             if(System.properties['sun.arch.data.model'] == "64") {
                 targetPlatform "x64"
             } else {
@@ -50,8 +37,7 @@ model {
                     include "**/*.hpp"
                 }
                 
-                lib project: ":lib", library: "easyloggingpp", linkage: "api"
-                lib project: ":libanni", library: "libanni", linkage: "static"
+                lib project: ":lib", library: "openNN", linkage: "static"
             }
         }
     }

@@ -1,0 +1,62 @@
+// Project-Type
+apply plugin: "cpp"
+
+model {
+    repositories {
+        libs(PrebuiltLibraries) {
+            easyloggingpp {
+                headers.srcDir "easyloggingpp/src"
+            }
+            eigen {
+                headers.srcDir "OpenNN/eigen/src"
+            }
+        }
+    }
+
+    components {
+        tinyxml2(NativeLibrarySpec) {
+            sources.cpp {
+                source {
+                    srcDirs "OpenNN"
+                    include "tinyxml2/**/*.cpp"
+                }
+                exportedHeaders {
+                    srcDirs "OpenNN"
+                    include "tinyxml2/**/*.h"
+                }
+            }
+        }
+        openNN(NativeLibrarySpec) {
+            sources.cpp {
+                source {
+                    srcDirs "OpenNN"
+                    include "opennn/**/*.cpp"
+                }
+                exportedHeaders {
+                    srcDirs "OpenNN"
+                    include "opennn/**/*.h"
+                }
+                
+                lib library: "eigen", linkage: "api"
+                lib library: "tinyxml2", linkage: "static"
+            }
+        }
+    }
+    
+    binaries {
+        withType(SharedLibraryBinary) {
+            buildable = false
+        }
+        withType(StaticLibraryBinarySpec) {
+            if (toolChain in Gcc) {
+                cppCompiler.args "-Werror", "-Ofast", "-g0"
+            }
+            if (toolChain in Clang) {
+                cppCompiler.args "-Werror", "-O0", "-g"
+            }
+            if (toolChain in VisualCpp) {
+                cppCompiler.args "/W0", "/EHsc", "/O2"
+            }
+        }
+    }
+}

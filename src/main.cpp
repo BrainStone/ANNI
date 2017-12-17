@@ -1,5 +1,3 @@
-#include <iostream>
-
 #if defined(__DEBUG__)
 	#define BUILD_TYPE "debug"
 #elif defined(__NDEBUG__)
@@ -7,6 +5,11 @@
 #else
 	#define BUILD_TYPE "unknow"
 #endif
+
+#include <iostream>
+
+// LibANNI
+#include "anni/anni.hpp"
 
 int main() {
 	std::cout << "Hello World!" << std::endl;
