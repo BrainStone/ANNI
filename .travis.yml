@@ -13,11 +13,16 @@ matrix:
           packages:
             - g++-7
       env:
-        - MATRIX_EVAL="CC=gcc-7 && CXX=g++-7"
+        - CC="gcc-7"
+        - CXX="g++-7"
     - os: osx
-      osx_image: xcode8.3
+      osx_image: xcode9.2
+      before_install:
+        - brew update
+        - brew install --overwrite gcc
       env:
-        - MATRIX_EVAL="brew update && brew install gcc && CC=gcc-7 && CXX=g++-7"
+        - CC="gcc-7"
+        - CXX="g++-7"
     - os: linux
       addons:
         apt:
@@ -26,10 +31,8 @@ matrix:
           packages:
             - clang-5.0
       env:
-        - MATRIX_EVAL="CC=clang-5.0 && CXX=clang++-5.0"
-
-before_install:
-  - eval "${MATRIX_EVAL}"
+        - CC="clang-5.0"
+        - CXX="clang++-5.0"
 
 install:
   - ./gradlew --console=plain
