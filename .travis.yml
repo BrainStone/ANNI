@@ -19,7 +19,8 @@ matrix:
       osx_image: xcode9.2
       before_install:
         - brew update
-        - brew install --overwrite gcc
+        - rm '/usr/local/include/c++'
+        - brew install gcc
       env:
         - CC="gcc-7"
         - CXX="g++-7"
