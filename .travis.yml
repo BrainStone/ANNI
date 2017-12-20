@@ -34,6 +34,8 @@ matrix:
         - CC="clang-5.0"
         - CXX="clang++-5.0"
 
+compiler: false
+
 install:
   - ./gradlew --console=plain
 
