@@ -1,5 +1,8 @@
 language: cpp
 
+git:
+  depth: false
+
 matrix:
   include:
     - os: linux
@@ -27,10 +30,11 @@ matrix:
 
 before_install:
   - eval "${MATRIX_EVAL}"
+  - alias gradle='./gradlew --console=plain'
 
 install:
-  - ./gradlew
+  - gradle
 
 script:
-  - ./gradlew --console=plain assemble
-  - ./gradlew --console=plain test
+  - gradle assemble
+  - gradle check
