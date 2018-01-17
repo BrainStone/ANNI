@@ -4,6 +4,12 @@ apply plugin: "cpp"
 model {
     repositories {
         libs(PrebuiltLibraries) {
+            if(System.properties['sun.arch.data.model'] == "64") {
+                targetPlatform "x64"
+            } else {
+                targetPlatform "x86"
+            }
+
             easyloggingpp {
                 headers.srcDir "easyloggingpp/src"
             }
