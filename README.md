@@ -33,7 +33,7 @@ Building is super straight forward:
 
 This will build the project and all its dependencies.
 
-Binaries for the ANNI library will be found inside `ANNI/build/libs/anni`
+Binaries for the ANNI library will be found inside `ANNI/build/libs/anni`.  
 Binaries for ANNI-Chess will be found inside `ANNI/implementations/build/exe/anniChess`.
 
 ### Documentation
