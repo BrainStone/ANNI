@@ -1,7 +1,20 @@
+buildscript {
+    repositories {
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath "com.diffplug.spotless:spotless-plugin-gradle:3.13.0"
+    }
+}
+
 // Project-Type
 apply plugin: "cpp"
 // IDEs
 apply plugin: "visual-studio"
+
+apply plugin: "com.diffplug.gradle.spotless"
 
 model {
     components {
@@ -66,5 +79,11 @@ model {
                 }
             }
         }
+    }
+}
+
+spotless {
+    format "cpp", {
+        target "src/**/*.hpp", "src/**/*.cpp"
     }
 }
