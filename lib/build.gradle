@@ -66,7 +66,7 @@ model {
                 cppCompiler.args "-std=c++1y", "-w", "-Ofast", "-g0"
             }
             if (toolChain in Clang) {
-                cppCompiler.args "-std=c++1y", "-w", "-O0", "-g"
+                cppCompiler.args "-std=c++1y", "-w", "-Ofast", "-g0"
             }
             if (toolChain in VisualCpp) {
                 cppCompiler.args "/std:c++14", "/W0", "/EHsc", "/O2"
