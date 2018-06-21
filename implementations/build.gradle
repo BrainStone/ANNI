@@ -18,7 +18,7 @@ apply plugin: "com.diffplug.gradle.spotless"
 
 model {
     components {
-        anni(NativeLibrarySpec) {
+        anniChess(NativeExecutableSpec) {
             if(System.properties['sun.arch.data.model'] == "64") {
                 targetPlatform "x64"
             } else {
@@ -27,15 +27,16 @@ model {
 
             sources.cpp {
                 source {
-                    srcDirs "src"
+                    srcDirs "chess/src"
                     include "**/*.cpp"
                 }
                 exportedHeaders {
-                    srcDirs "src"
+                    srcDirs "chess/src"
                     include "**/*.hpp"
                 }
                 
-                lib project: ":lib", library: "openNN", linkage: "static"
+                lib project: ":lib", library: "easyloggingpp", linkage: "api"
+                lib project: ":", library: "anni", linkage: "static"
             }
         }
     }

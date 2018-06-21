@@ -51,7 +51,7 @@ model {
     }
 
     components {
-        anniChess(NativeExecutableSpec) {
+        anni(NativeLibrarySpec) {
             if(System.properties['sun.arch.data.model'] == "64") {
                 targetPlatform "x64"
             } else {
@@ -68,8 +68,7 @@ model {
                     include "**/*.hpp"
                 }
                 
-                lib project: ":lib", library: "easyloggingpp", linkage: "api"
-                lib project: ":anni", library: "anni", linkage: "static"
+                lib project: ":lib", library: "openNN", linkage: "static"
             }
         }
     }
