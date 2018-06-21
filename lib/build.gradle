@@ -43,10 +43,12 @@ model {
                 source {
                     srcDirs "OpenNN"
                     include "opennn/**/*.cpp"
+                    exclude "opennn/informedness_optimization_threshold.cpp"
                 }
                 exportedHeaders {
                     srcDirs "OpenNN"
                     include "opennn/**/*.h"
+                    exclude "opennn/informedness_optimization_threshold.h"
                 }
                 
                 lib library: "eigen", linkage: "api"
