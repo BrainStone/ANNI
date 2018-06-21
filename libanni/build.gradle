@@ -14,11 +14,6 @@ model {
         }
     }*/
 
-    buildTypes {
-        debug
-        release
-    }
-
     components {
         libanni(NativeLibrarySpec) {
             if(System.properties['sun.arch.data.model'] == "64") {

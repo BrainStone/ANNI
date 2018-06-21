@@ -13,7 +13,12 @@ allprojects {
                 architecture "x64"
             }
         }
-    }
+
+        buildTypes {
+            debug
+            release
+        }
+    } 
 }
 
 model {
@@ -25,11 +30,6 @@ model {
                 content.text = content.text.replaceAll("HideSolutionNode = FALSE", "HideSolutionNode = TRUE")
             }
         }
-    }
-
-    buildTypes {
-        debug
-        release
     }
 
     components {
