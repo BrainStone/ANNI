@@ -4,16 +4,16 @@ apply plugin: "cpp"
 apply plugin: "visual-studio"
 
 model {
-    visualStudio {
-        solutions.all {
+    /*visualStudio {
+        solution {
             solutionFile.location = "vs/${name}.sln"
             solutionFile.withContent { TextProvider content ->
                 content.asBuilder().insert(0, "# GENERATED FILE: DO NOT EDIT\n")
                 content.text = content.text.replaceAll("HideSolutionNode = FALSE", "HideSolutionNode = TRUE")
             }
         }
-    }
-    
+    }*/
+
     buildTypes {
         debug
         release

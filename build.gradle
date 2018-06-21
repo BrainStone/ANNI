@@ -18,7 +18,7 @@ allprojects {
 
 model {
     visualStudio {
-        solutions.all {
+        solution {
             solutionFile.location = "vs/${name}.sln"
             solutionFile.withContent { TextProvider content ->
                 content.asBuilder().insert(0, "# GENERATED FILE: DO NOT EDIT\n")
@@ -26,7 +26,7 @@ model {
             }
         }
     }
-    
+
     buildTypes {
         debug
         release
