@@ -5,7 +5,7 @@ apply plugin: "visual-studio"
 
 model {
     components {
-        libanni(NativeLibrarySpec) {
+        anni(NativeLibrarySpec) {
             if(System.properties['sun.arch.data.model'] == "64") {
                 targetPlatform "x64"
             } else {

@@ -33,7 +33,7 @@ model {
     }
 
     components {
-        anni(NativeExecutableSpec) {
+        anniChess(NativeExecutableSpec) {
             if(System.properties['sun.arch.data.model'] == "64") {
                 targetPlatform "x64"
             } else {
@@ -51,7 +51,7 @@ model {
                 }
                 
                 lib project: ":lib", library: "easyloggingpp", linkage: "api"
-                lib project: ":libanni", library: "libanni", linkage: "static"
+                lib project: ":anni", library: "anni", linkage: "static"
             }
         }
     }

@@ -1,4 +1,4 @@
 include "lib"
-include "libanni"
+include "anni"
 
 rootProject.name = 'ANNI'
