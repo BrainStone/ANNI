@@ -130,9 +130,9 @@ task doc {
 
 task generateHTMLdoc(type: Zip, dependsOn: "runDoxygen") {
     inputs.dir "build/doc/gen/html"
-    outputs.files "build/doc/${name}-doc.zip"
+    outputs.files "build/doc/${project.name}-doc.zip"
 
-    baseName = "${name}-doc"
+    baseName = "${project.name}-doc"
     version = ""
     destinationDir = file("build/doc")
     from "build/doc/gen/html"
@@ -144,7 +144,7 @@ task generatePDFdoc(type: Exec, dependsOn: "runDoxygen") {
     }
 
     inputs.dir "build/doc/gen/latex"
-    outputs.files "build/doc/${name}-doc.pdf"
+    outputs.files "build/doc/${project.name}-doc.pdf"
 
     doFirst {
         def log = file("build/tmp/generatePDFdoc/output.txt")
@@ -159,7 +159,7 @@ task generatePDFdoc(type: Exec, dependsOn: "runDoxygen") {
             into "build/doc"
 
             include "refman.pdf"
-            rename "refman.pdf", "${name}-doc.pdf"
+            rename "refman.pdf", "${project.name}-doc.pdf"
         }
     }
 
