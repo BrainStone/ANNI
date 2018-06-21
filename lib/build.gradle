@@ -63,10 +63,10 @@ model {
         }
         withType(StaticLibraryBinarySpec) {
             if (toolChain in Gcc) {
-                cppCompiler.args "-std=c++1y", "-Werror", "-Ofast", "-g0"
+                cppCompiler.args "-std=c++1y", "-w", "-Ofast", "-g0"
             }
             if (toolChain in Clang) {
-                cppCompiler.args "-std=c++1y", "-Werror", "-O0", "-g"
+                cppCompiler.args "-std=c++1y", "-w", "-O0", "-g"
             }
             if (toolChain in VisualCpp) {
                 cppCompiler.args "/std:c++14", "/W0", "/EHsc", "/O2"
