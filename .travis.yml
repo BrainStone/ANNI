@@ -32,7 +32,8 @@ matrix:
       env:
         - MATRIX_EVAL="CC=clang-5.0 && CXX=clang++-5.0"
 
-compiler: false
+before_install:
+  - eval "${MATRIX_EVAL}"
 
 install:
   - ./gradlew --console=plain
