@@ -1,15 +1,4 @@
-#if defined(__DEBUG__)
-	#define BUILD_TYPE "debug"
-#elif defined(__NDEBUG__)
-	#define BUILD_TYPE "release"
-#else
-	#define BUILD_TYPE "unknow"
-#endif
-
-#include <iostream>
-
-// LibANNI
-#include "anni/anni.hpp"
+#include "main.hpp"
 
 int main() {
 	std::cout << "Hello World!" << std::endl;
