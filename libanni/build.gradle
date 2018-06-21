@@ -4,16 +4,6 @@ apply plugin: "cpp"
 apply plugin: "visual-studio"
 
 model {
-    /*visualStudio {
-        solution {
-            solutionFile.location = "vs/${name}.sln"
-            solutionFile.withContent { TextProvider content ->
-                content.asBuilder().insert(0, "# GENERATED FILE: DO NOT EDIT\n")
-                content.text = content.text.replaceAll("HideSolutionNode = FALSE", "HideSolutionNode = TRUE")
-            }
-        }
-    }*/
-
     components {
         libanni(NativeLibrarySpec) {
             if(System.properties['sun.arch.data.model'] == "64") {
