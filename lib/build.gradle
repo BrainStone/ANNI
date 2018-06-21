@@ -58,7 +58,7 @@ model {
     }
     
     binaries {
-        withType(SharedLibraryBinary) {
+        withType(SharedLibraryBinarySpec) {
             buildable = false
         }
         withType(StaticLibraryBinarySpec) {
