@@ -114,5 +114,7 @@ model {
 spotless {
     format "cpp", {
         target "src/**/*.hpp", "src/**/*.cpp"
+
+        licenseHeaderFile "LICENSE-header.txt", "#"
     }
 }
