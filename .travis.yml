@@ -20,6 +20,9 @@ matrix:
         - brew update
         - rm '/usr/local/include/c++'
         - brew install gcc
+        - eval "${MATRIX_EVAL}"
+        - $CC --version
+        - $CXX --version
       env:
         - MATRIX_EVAL="CC=gcc-7 && CXX=g++-7"
     - os: linux
