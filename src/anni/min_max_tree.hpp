@@ -4,8 +4,25 @@
 //  
 #pragma once
 
-namespace anni {
-	class MinMaxTree {
+#include <functional>
+#include <list>
 
+namespace anni {
+	template<
+		class T,
+		class comparator = std::less<T>
+	>
+	class MinMaxTree {
+	private:
+		class Node {
+		private:
+			T value;
+			std::list<Node> children;
+		};
+
+		Node root;
 	};
 }
+
+// Hack for template classes
+#include "min_max_tree.cpp"
